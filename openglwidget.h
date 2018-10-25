@@ -1,9 +1,11 @@
 #ifndef OPENGLWIDGET_H
 #define OPENGLWIDGET_H
 
-#include "target.h"
+#include "model.h"
 #include "arrow.h"
 #include "powerbar.h"
+#include "target.h"
+#include <memory>
 
 #include <QWidget>
 #include <QOpenGLWidget>
@@ -24,13 +26,13 @@ class OpenGLWidget : public QOpenGLWidget , protected QOpenGLExtraFunctions
         QTimer *timer;
         QTime *time;
         OpenGLWidget(QWidget * parent = 0);
-        void openFileOff();
 
 
     protected:
         void initializeGL();
         void resizeGL(int width , int height);
         void paintGL();
+        void createModels();
 
 
 };

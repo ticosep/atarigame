@@ -26,17 +26,19 @@ QT += core gui opengl
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    target.cpp \
     powerbar.cpp \
     arrow.cpp \
-    openglwidget.cpp
+    openglwidget.cpp \
+    model.cpp \
+    target.cpp
 
 HEADERS += \
         mainwindow.h \
-    target.h \
     powerbar.h \
     arrow.h \
-    openglwidget.h
+    openglwidget.h \
+    model.h \
+    target.h
 
 FORMS += \
         mainwindow.ui
