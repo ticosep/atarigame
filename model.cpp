@@ -189,6 +189,7 @@ void Model::drawModel()
     loaded = true;
 }
 
+
 void Model::readOFFFile (QString const & offFile)
 {
     QDir tempDir;
@@ -253,4 +254,10 @@ void Model::readOFFFile (QString const & offFile)
         createVBOs ();
       }
 
+}
+
+void Model::createModel()
+{
+    createShaders();
+    createVBOs ();
 }

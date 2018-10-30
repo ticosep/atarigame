@@ -50,6 +50,7 @@ public:
     void destroyShaders();
     void readOFFFile(const QString &fileName);
     void drawModel();
+    void createModel();
 
 
 };
