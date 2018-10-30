@@ -16,6 +16,7 @@ public:
     Model();
     ~Model();
     std::unique_ptr <QVector4D[]> vertices;
+    std::unique_ptr <QVector4D[]> colors;
     std::unique_ptr <unsigned int []> indices;
 
 
@@ -31,6 +32,7 @@ public:
     GLuint vao = 0;
     GLuint vboVertices = 0;
     GLuint vboIndices = 0;
+    GLuint vboColors = 0;
     GLuint shaderProgram = 0;
 
     QMatrix4x4 modelMatrix;
@@ -38,6 +40,7 @@ public:
 
     QVector4D max;
     QVector4D min;
+    QVector4D color;
 
     double invDiag;
 

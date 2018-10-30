@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\powerbar.o
+./debug\arrow.o
+./debug\openglwidget.o
+./debug\model.o
+./debug\target.o
+./debug\qrc_resources.o
+./debug\moc_mainwindow.o
+./debug\moc_openglwidget.o
+);

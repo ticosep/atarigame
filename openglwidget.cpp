@@ -11,6 +11,7 @@ void OpenGLWidget::initializeGL()
     qDebug ("OpenGL version : %s", glGetString(GL_VERSION));
     qDebug ("GLSL %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
     glEnable (GL_DEPTH_TEST);
+    createModels();
 
 
 }
@@ -24,12 +25,21 @@ void OpenGLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    if(!target)
+        return;
+    target->drawModel();
+
+
+
 
 }
 
 void OpenGLWidget::createModels()
 {
     target = std::make_shared<Target>();
+    target->createTarget();
+
+    update();
 }
 
 

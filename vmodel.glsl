@@ -1,15 +1,16 @@
 #version 400
 layout(location = 0) in vec4 vPosition;
-out vec4 v2fcolor;
+layout (location = 1) in vec4 vColors;
 
 uniform mat4 model;
+
+// output variable interpolated at fragment shader raster
+out vec4 v2fcolor;
 
 
 void main ()
 {
     gl_Position = model * vPosition;
     // We could infer the depth of the model
-    float gray = (gl_Position . z + 1) * 0.5;
-    v2fcolor = vec4( gray , gray , gray , 1);
-
+    v2fcolor = vColors;
 }

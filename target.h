@@ -9,7 +9,11 @@ public:
     Target();
 
     std::vector<std::shared_ptr<Model>> circles;
+    std::vector<QVector4D> colorsCircle;
+
     void createTarget();
+    void drawModel();
+    void populateColors();
 
     unsigned int numCircles = 3;
 };

@@ -20,9 +20,11 @@ void Model::destroyVBOs()
     // makeCurrent ();
     glDeleteBuffers(1 , &vboVertices);
     glDeleteBuffers (1 , &vboIndices);
+     glDeleteBuffers (1 , &vboColors);
     glDeleteVertexArrays (1 , &vao);
     vboVertices = 0;
     vboIndices = 0;
+    vboColors = 0;
     vao = 0;
 }
 
@@ -37,11 +39,19 @@ void Model::createVBOs()
     destroyVBOs();
     glGenVertexArrays (1 , &vao);
     glBindVertexArray(vao);
+
     glGenBuffers(1 , &vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, vboVertices);
     glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(QVector4D),vertices.get(), GL_STATIC_DRAW);
     glVertexAttribPointer (0, 4, GL_FLOAT, GL_FALSE, 0, nullptr);
     glEnableVertexAttribArray (0);
+
+    glGenBuffers(1, &vboColors);
+    glBindBuffer(GL_ARRAY_BUFFER, vboColors);
+    glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(QVector4D), colors.get(), GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, nullptr);
+    glEnableVertexAttribArray(1);
+
     glGenBuffers(1 , &vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,numFaces * 3 * sizeof(unsigned int), indices.get() , GL_STATIC_DRAW);
@@ -167,6 +177,10 @@ void Model::drawModel()
     modelMatrix.scale(invDiag, invDiag, invDiag);
     modelMatrix.translate(-midPoint);
 
+    modelMatrix.rotate(this->xTransform, 1, 0, 0);
+    modelMatrix.rotate(this->yTransform, 0, 1, 0);
+    modelMatrix.rotate(this->zTransform, 0, 0, 1);
+
     glBindVertexArray(vao);
     glUseProgram(shaderProgram);
     GLuint locTargetMatrix = glGetUniformLocation(shaderProgram,"model");
@@ -195,7 +209,9 @@ void Model::readOFFFile (QString const & offFile)
     std::string line;
     stream >> line;
     stream >> numVertices >> numFaces >> line;
+
     vertices = std::make_unique <QVector4D[]>(numVertices);
+    colors = std::make_unique <QVector4D[]>(numVertices);
     indices = std::make_unique <unsigned int []>( numFaces * 3);
 
     if ( numVertices > 0)
@@ -227,8 +243,14 @@ void Model::readOFFFile (QString const & offFile)
                 indices [i * 3 + 1] = b;
                 indices [i * 3 + 2] = c;
             }
+
+        for (unsigned int i = 0; i < numVertices; i++){
+                colors[i] = color;
+            }
+
         stream.close();
         createShaders();
         createVBOs ();
       }
+
 }
