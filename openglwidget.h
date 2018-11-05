@@ -23,6 +23,7 @@ class OpenGLWidget : public QOpenGLWidget , protected QOpenGLExtraFunctions
 
     public:
         std::shared_ptr<Target> target = nullptr;
+        std::shared_ptr<PowerBar> pb = nullptr;
         QTimer *timer;
         QTime *time;
         OpenGLWidget(QWidget * parent = 0);

@@ -2,17 +2,19 @@
 
 PowerBar::PowerBar()
 {
-
+    createSquare();
 }
 
 void PowerBar::createSquare()
 {
+
     unsigned int numVertices = 4;
     unsigned int numFaces = 1;
+    square = std::make_shared<Model>();
 
-    std::unique_ptr <QVector4D[]> vertices = std::make_unique <QVector4D[]>(numVertices);
-    std::unique_ptr <QVector4D[]> colors = std::make_unique <QVector4D[]>(numVertices);
-    std::unique_ptr <unsigned int []> indices = std::make_unique <unsigned int []>( numFaces * 3);
+    square->vertices = std::make_unique <QVector4D[]>(numVertices);
+    square->colors = std::make_unique <QVector4D[]>(numVertices);
+    square->indices = std::make_unique <unsigned int []>( numFaces * 3);
 
     if ( numVertices > 0)
     {
@@ -32,8 +34,8 @@ void PowerBar::createSquare()
                 min.setZ(std::min(min.z(), z));
                 vertices[i] = QVector4D (x , y , z , 1.0);
             }
-        this->midPoint = QVector3D(( min + max ) * 0.5);
-        this->invDiag = 2.0 / (max - min).length();
+        square->midPoint = QVector3D(( min + max ) * 0.5);
+        square->invDiag = 2.0 / (max - min).length();
 
         for (unsigned int i = 0; i < numFaces ; ++ i)
             {
@@ -44,6 +46,9 @@ void PowerBar::createSquare()
             }
 
         for (unsigned int i = 0; i < numVertices; i++){
-                colors[i] = color;
+                colors[i] = QVector4D(0, 1, 0, 1);
             }
+    }
+
+    square->createModel();
 }

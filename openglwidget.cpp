@@ -39,6 +39,8 @@ void OpenGLWidget::createModels()
     target = std::make_shared<Target>();
     target->createTarget();
 
+    pb = std::make_shared<PowerBar>();
+
     update();
 }
 

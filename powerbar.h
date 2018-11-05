@@ -13,6 +13,9 @@ public:
     void createLine();
     void createSquare();
 
+private:
+    std::vector<Model> square;
+
 };
 
 #endif // POWERBAR_H
