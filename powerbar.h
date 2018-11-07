@@ -10,11 +10,11 @@ public:
     PowerBar();
 
     void createPowerBar();
-    void createLine();
     void createSquare();
+    void drawModel();
 
 private:
-    std::vector<Model> square;
+    std::shared_ptr<Model> squareX = nullptr;
 
 };
 

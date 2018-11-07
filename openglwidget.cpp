@@ -28,6 +28,7 @@ void OpenGLWidget::paintGL()
     if(!target)
         return;
     target->drawModel();
+    pb->drawModel();
 
 
 
