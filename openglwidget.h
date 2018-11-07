@@ -22,12 +22,17 @@ class OpenGLWidget : public QOpenGLWidget , protected QOpenGLExtraFunctions
 
 
     public:
+
+        int pts = 0; // Number of points
+        int power;
         std::shared_ptr<Target> target = nullptr;
-        std::shared_ptr<PowerBar> pb = nullptr;
+        std::shared_ptr<Model> arrow = nullptr;
+
         QTimer *timer;
         QTime *time;
         OpenGLWidget(QWidget * parent = 0);
 
+        void keyPressEvent(QKeyEvent *event);
 
     protected:
         void initializeGL();
@@ -36,9 +41,14 @@ class OpenGLWidget : public QOpenGLWidget , protected QOpenGLExtraFunctions
         void createModels();
 
 
+
 public slots:
     void animate();
 
+signals:
+    void updatePtsLabel(QString);
+    void updateXpLabel(QString);
+    void updateYpLabel(QString);
 
 };
 

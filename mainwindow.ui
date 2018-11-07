@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>833</width>
-    <height>622</height>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,6 +22,63 @@
       <width>811</width>
       <height>541</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="xpower">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>X POWER :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ypower">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>560</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Y POWER :</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pts">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>560</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>POINTS:</string>
     </property>
    </widget>
   </widget>
@@ -51,8 +108,65 @@
    <class>OpenGLWidget</class>
    <extends>QOpenGLWidget</extends>
    <header>openglwidget.h</header>
+   <slots>
+    <signal>updateHitsLabel(QString)</signal>
+    <signal>updatePtsLabel(QString)</signal>
+    <signal>updateXpLabel(QString)</signal>
+    <signal>updateYpLabel(QString)</signal>
+    <slot>toggleBackgroundColor(bool)</slot>
+    <slot>changeDiagonal()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>openGLWidget</sender>
+   <signal>updateYpLabel(QString)</signal>
+   <receiver>ypower</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>414</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>290</x>
+     <y>618</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openGLWidget</sender>
+   <signal>updateXpLabel(QString)</signal>
+   <receiver>xpower</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>414</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>90</x>
+     <y>618</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openGLWidget</sender>
+   <signal>updatePtsLabel(QString)</signal>
+   <receiver>pts</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>414</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>510</x>
+     <y>618</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
