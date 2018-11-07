@@ -14,6 +14,13 @@ void OpenGLWidget::initializeGL()
     createModels();
 
 
+    time =  new QTime();
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(animate()));
+    timer->start(300);
+    time->start();
+
+
 }
 
 void OpenGLWidget::resizeGL( int w , int h )
@@ -25,7 +32,7 @@ void OpenGLWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if(!target)
+    if(!target || !pb)
         return;
     target->drawModel();
     pb->drawModel();
@@ -43,6 +50,14 @@ void OpenGLWidget::createModels()
     pb = std::make_shared<PowerBar>();
 
     update();
+}
+
+void OpenGLWidget::animate()
+{
+   pb->animate();
+
+   update();
+
 }
 
 

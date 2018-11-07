@@ -36,6 +36,10 @@ class OpenGLWidget : public QOpenGLWidget , protected QOpenGLExtraFunctions
         void createModels();
 
 
+public slots:
+    void animate();
+
+
 };
 
 #endif // OPENGLWIDGET_H
